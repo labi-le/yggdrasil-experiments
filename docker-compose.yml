@@ -1,0 +1,18 @@
+services:
+  yggdrasil-gost:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: yggdrasil-gost-client
+    restart: unless-stopped
+    volumes:
+      - ./yggdrasil/:/etc/yggdrasil/
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      net.ipv6.conf.all.disable_ipv6: 0
+    ports:
+      - "10880:10880"
+      - "10881:10881"
+
